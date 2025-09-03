@@ -1,5 +1,4 @@
 export const dynamic = "force-dynamic";
-
 import { buttonVariants } from "@/components/ui/button";
 import Link from "next/link";
 import { prisma } from "../../utils/db";

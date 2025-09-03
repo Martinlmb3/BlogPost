@@ -4,6 +4,8 @@ import { Card, CardContent } from "@/components/ui/card";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { Textarea } from '@/components/ui/textarea';
+import { ThumbsDown, ThumbsUp } from 'lucide-react';
 
 export const revalidate = 200;
 
@@ -34,7 +36,7 @@ return (
     </Link>
 
     <div className="mb-8 mt-6">
-        <h1 className="text-3xl font-bold tracking-tight mb-4">{data.title}</h1>
+        <h1 className="text-3xl font-bold tracking-tight mb-4 text-center">{data.title}</h1>
         <div className="flex items-center space-x-4">
         <div className="flex items-center space-x-2">
             <div className="relative size-10 overflow-hidden rounded-full">
@@ -57,7 +59,7 @@ return (
         </div>
     </div>
 
-    <div className="relative h-[400px] w-full mb-8 overflow-hidden rounded-lg">
+    <div className="relative h-[400px] w-full overflow-hidden rounded-lg">
         <Image
         src={data.imageUrl}
         alt={data.title}
@@ -67,9 +69,34 @@ return (
         />
     </div>
 
-    <Card>
+    <Card className="mb-5">
         <CardContent>
         <p className="text-gray-700">{data.content}</p>
+        </CardContent>
+    </Card>
+    <Card className="mb-5">
+        <CardContent>
+            <form action="">
+                <Textarea name="comment" id="comment" className="w-full mb-3" />
+                <div className="flex ">
+                    <button 
+                    className="ml-auto flex-grow-0 px-4 py-2 cursor-pointer bg-gray-200 rounded">Cancel</button>
+                    <input 
+                    type="submit" 
+                    value="Add a comment" 
+                    className="flex-grow-0 px-4 py-2 cursor-pointer bg-blue-500 text-white rounded ml-2" />
+                </div>
+            </form>
+        </CardContent>
+    </Card>
+    <Card>
+        <CardContent>
+            <p>UserName <span>Datetime</span></p>
+            <p>content</p>
+            <div className="flex items-center space-x-2 mt-2">
+                <ThumbsUp className="w-5 h-5 cursor-pointer hover:fill-blue-500 hover:text-blue-500" />
+                <ThumbsDown className="w-5 h-5 cursor-pointer hover:fill-red-500 hover:text-red-500" />
+            </div>
         </CardContent>
     </Card>
     </div>
