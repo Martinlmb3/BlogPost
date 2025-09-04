@@ -4,23 +4,41 @@ import { Card, CardContent } from "@/components/ui/card";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { Textarea } from '@/components/ui/textarea';
-import { ThumbsDown, ThumbsUp } from 'lucide-react';
+import { CommentForm } from "@/components/general/CommentForm";
+import { CommentSection } from "@/components/general/CommentSection";
+import { LikeButtonWrapper } from "@/components/general/LikeButtonWrapper";
 
 export const revalidate = 200;
 
 async function getData(id: string) {
-const data = await prisma.blogPost.findUnique({
+  const data = await prisma.blogPost.findUnique({
     where: {
-    id: id,
+      id: id,
     },
-});
+    include: {
+      comments: {
+        where: {
+          parentCommentId: null, // Only get top-level comments
+        },
+        include: {
+          replies: {
+            include: {
+              replies: true, // Include nested replies
+            },
+          },
+        },
+        orderBy: {
+          createdAt: "desc",
+        },
+      },
+    },
+  });
 
-if (!data) {
+  if (!data) {
     return notFound();
-}
+  }
 
-return data;
+  return data;
 }
 
 type Params = Promise<{ id: string }>;
@@ -69,36 +87,22 @@ return (
         />
     </div>
 
-    <Card className="mb-5">
+    <Card className="mb-8">
         <CardContent>
-        <p className="text-gray-700">{data.content}</p>
+          <p className="text-gray-700 mb-6">{data.content}</p>
+          
+          {/* Like Button */}
+          <div className="flex justify-center pt-4 border-t border-gray-100">
+            <LikeButtonWrapper postId={data.id} initialLikes={data.likes} size="lg" />
+          </div>
         </CardContent>
     </Card>
-    <Card className="mb-5">
-        <CardContent>
-            <form action="">
-                <Textarea name="comment" id="comment" className="w-full mb-3" />
-                <div className="flex ">
-                    <button 
-                    className="ml-auto flex-grow-0 px-4 py-2 cursor-pointer bg-gray-200 rounded">Cancel</button>
-                    <input 
-                    type="submit" 
-                    value="Add a comment" 
-                    className="flex-grow-0 px-4 py-2 cursor-pointer bg-blue-500 text-white rounded ml-2" />
-                </div>
-            </form>
-        </CardContent>
-    </Card>
-    <Card>
-        <CardContent>
-            <p>UserName <span>Datetime</span></p>
-            <p>content</p>
-            <div className="flex items-center space-x-2 mt-2">
-                <ThumbsUp className="w-5 h-5 cursor-pointer hover:fill-blue-500 hover:text-blue-500" />
-                <ThumbsDown className="w-5 h-5 cursor-pointer hover:fill-red-500 hover:text-red-500" />
-            </div>
-        </CardContent>
-    </Card>
+
+    {/* Comment Form */}
+    <CommentForm blogPostId={data.id} />
+
+    {/* Comments Section */}
+    <CommentSection comments={data.comments} blogPostId={data.id} />
     </div>
 );
 }

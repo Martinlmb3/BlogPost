@@ -11,6 +11,18 @@ async function getData(userId: string) {
     where: {
       authorId: userId,
     },
+    select: {
+      title: true,
+      content: true,
+      imageUrl: true,
+      authorImage: true,
+      authorName: true,
+      id: true,
+      likes: true,
+      createdAt: true,
+      authorId: true,
+      updatedAt: true,
+    },
     orderBy: {
       createdAt: "desc",
     },
@@ -34,7 +46,7 @@ export default async function DashboardRoute() {
       <div className="flex items-center justify-between mb-4">
         <h2 className="text-xl font-medium">Your Blog Articles</h2>
 
-        <Link className={buttonVariants()} href="/dashboard/create">
+        <Link className={buttonVariants()} href="/create">
           Create Post
         </Link>
       </div>

@@ -14,6 +14,7 @@ async function getAllPosts() {
       authorImage: true,
       authorName: true,
       id: true,
+      likes: true,
       createdAt: true,
       authorId: true,
       updatedAt: true,

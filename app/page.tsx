@@ -6,7 +6,6 @@ import { Skeleton } from "@/components/ui/skeleton";
 export const revalidate = 60;
 
 async function getData() {
-  await new Promise((resolve) => setTimeout(resolve, 2000));
   const data = await prisma.blogPost.findMany({
     select: {
       title: true,
@@ -15,6 +14,7 @@ async function getData() {
       authorImage: true,
       authorName: true,
       id: true,
+      likes: true,
       createdAt: true,
       authorId: true,
       updatedAt: true,
@@ -39,7 +39,7 @@ export default function Home() {
           Create beautiful blog posts with ease. BlogPost provides a simple and intuitive platform to bring your ideas to life with a title, an image, and a description.
         </p>
         <div className="mt-10">
-          <a className="bg-green-500 text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-green-600 transition-transform transform hover:scale-105 inline-flex items-center" href="/dashboard/create">
+          <a className="bg-green-500 text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-green-600 transition-transform transform hover:scale-105 inline-flex items-center" href="/create">
             Create a Post Now
             <span className="material-icons ml-2">arrow_forward</span>
           </a>

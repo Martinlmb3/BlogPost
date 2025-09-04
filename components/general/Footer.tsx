@@ -1,4 +1,7 @@
 "use client";
+
+import Link from "next/link";
+
 export function Footer(){
     return (    
         <footer className="bg-gray-200 text-gray-800 mt-16 w-full">
@@ -27,9 +30,9 @@ export function Footer(){
                     <div>
                         <h4 className="text-lg font-semibold mb-4">Quick Links</h4>
                         <ul className="space-y-2">
-                            <li><a href="/" className="text-gray-600 hover:text-gray-900 transition-colors">Home</a></li>
-                            <li><a href="/dashboard" className="text-gray-600 hover:text-gray-900 transition-colors">Dashboard</a></li>
-                            <li><a href="/dashboard/create" className="text-gray-600 hover:text-gray-900 transition-colors">Create Post</a></li>
+                            <li><Link href="/" className="text-gray-600 hover:text-gray-900 transition-colors">Home</Link></li>
+                            <li><Link href="/posts" className="text-gray-600 hover:text-gray-900 transition-colors">Posts</Link></li>
+                            <li><Link href="/create" className="text-gray-600 hover:text-gray-900 transition-colors">Create Post</Link></li>
                         </ul>
                     </div>
                     
@@ -37,10 +40,10 @@ export function Footer(){
                     <div>
                         <h4 className="text-lg font-semibold mb-4">Support</h4>
                         <ul className="space-y-2">
-                            <li><a href="#" className="text-gray-600 hover:text-gray-900 transition-colors">Help Center</a></li>
-                            <li><a href="#" className="text-gray-600 hover:text-gray-900 transition-colors">Contact Us</a></li>
-                            <li><a href="#" className="text-gray-600 hover:text-gray-900 transition-colors">Privacy Policy</a></li>
-                            <li><a href="#" className="text-gray-600 hover:text-gray-900 transition-colors">Terms of Service</a></li>
+                            <li><Link href="#" className="text-gray-600 hover:text-gray-900 transition-colors">Help Center</Link></li>
+                            <li><Link href="#" className="text-gray-600 hover:text-gray-900 transition-colors">Contact Us</Link></li>
+                            <li><Link href="#" className="text-gray-600 hover:text-gray-900 transition-colors">Privacy Policy</Link></li>
+                            <li><Link href="#" className="text-gray-600 hover:text-gray-900 transition-colors">Terms of Service</Link></li>
                         </ul>
                     </div>
                 </div>
@@ -48,7 +51,7 @@ export function Footer(){
                 {/* Bottom Section */}
                 <div className="border-t border-gray-300 mt-8 pt-8 text-center">
                     <p className="text-gray-500">
-                        © 2025 BlogPost. All rights reserved. Made with ❤️ for storytellers everywhere.
+                        © {new Date().getFullYear()} BlogPost. All rights reserved. Made with ❤️ for storytellers everywhere.
                     </p>
                 </div>
             </div>
