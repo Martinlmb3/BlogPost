@@ -1,12 +1,11 @@
 import { BlogPostCard } from "@/components/general/BlogPostCard";
-import { prisma } from "../utils/db";
+import { prisma } from "../../utils/db";
 import { Suspense } from "react";
 import { Skeleton } from "@/components/ui/skeleton";
 
 export const revalidate = 60;
 
-async function getData() {
-  await new Promise((resolve) => setTimeout(resolve, 2000));
+async function getAllPosts() {
   const data = await prisma.blogPost.findMany({
     select: {
       title: true,
@@ -22,46 +21,36 @@ async function getData() {
     orderBy: {
       createdAt: "desc",
     },
-    take: 3,
   });
 
   return data;
 }
 
-export default function Home() {
+export default function PostsPage() {
   return (
-    <>
-      <section className="text-center mb-16">
-        <h1 className="text-5xl md:text-6xl font-bold text-gray-800 leading-tight">
-          Share Your Stories with the World
-        </h1>
-        <p className="mt-6 text-lg text-gray-600 max-w-2xl mx-auto">
-          Create beautiful blog posts with ease. BlogPost provides a simple and intuitive platform to bring your ideas to life with a title, an image, and a description.
-        </p>
-        <div className="mt-10">
-          <a className="bg-green-500 text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-green-600 transition-transform transform hover:scale-105 inline-flex items-center" href="/dashboard/create">
-            Create a Post Now
-            <span className="material-icons ml-2">arrow_forward</span>
-          </a>
-        </div>
-      </section>
-      
-      <div className="py-6">
-        <h1 className="text-3xl font-bold tracking-tight mb-8">Latest posts</h1>
-
-        <Suspense fallback={<BlogPostsGrid />}>
-          <BlogPosts />
-        </Suspense>
-      </div>
-    </>
+    <div className="py-6">
+      <h1 className="m-5 text-4xl font-medium text-center">All Blog Posts</h1>
+      <Suspense fallback={<BlogPostsGrid />}>
+        <BlogPosts />
+      </Suspense>
+    </div>
   );
 }
 
 async function BlogPosts() {
-  const data = await getData();
+  const data = await getAllPosts();
+
+  if (data.length === 0) {
+    return (
+      <div className="text-center py-12">
+        <h2 className="text-2xl font-semibold text-gray-600 mb-4">No posts found</h2>
+        <p className="text-gray-500">Be the first to create a blog post!</p>
+      </div>
+    );
+  }
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
       {data.map((item) => (
         <BlogPostCard data={item} key={item.id} />
       ))}
@@ -72,9 +61,8 @@ async function BlogPosts() {
 // Blog posts grid with loading state
 function BlogPostsGrid() {
   return (
-    
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-      {Array.from({ length: 3 }).map((_, index) => (
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {Array.from({ length: 6 }).map((_, index) => (
         <div
           className="rounded-lg border bg-card text-card-foreground shadow-sm h-[400px] flex flex-col overflow-hidden"
           key={index}

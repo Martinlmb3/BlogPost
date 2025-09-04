@@ -4,7 +4,7 @@ export default withAuth(
   async function middleware() {
   },
   {
-    publicPaths: ["/","/dashboard"],//Route publique
+    publicPaths: ["/","/dashboard","/posts"],//Route publique
   }
 );
 

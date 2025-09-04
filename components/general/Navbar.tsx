@@ -7,7 +7,7 @@ import {
   LoginLink,
   LogoutLink,
 } from "@kinde-oss/kinde-auth-nextjs/components";
-
+import { Bell } from "lucide-react";
 import { useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs";
 
 export function Navbar() {
@@ -26,21 +26,32 @@ export function Navbar() {
         <div className="hidden sm:flex items-center gap-6">
           <Link
             className="text-sm font-medium hover:text-green-500 transition-colors"
-            href="/"
+            href="/posts"
           >
-            Home
+            Posts
           </Link>
-          <Link
-            className="text-sm font-medium hover:text-green-500 transition-colors"
-            href="/dashboard"
-          >
-            Dashboard
-          </Link>
+          {user && (
+            <>
+              <Link
+                className="text-sm font-medium hover:text-green-500 transition-colors"
+                href="/my-post"
+              >
+                My Posts
+              </Link>
+              <Link
+                className="text-sm font-medium hover:text-green-500 transition-colors"
+                href="/dashboard"
+              >
+                Dashboard
+              </Link>
+            </>
+          )}
         </div>
       </div>
 
       {user ? (
         <div className="flex items-center gap-4">
+          <Bell className="w-5 h-5 sm:w-6 sm:h-6 text-black cursor-pointer hover:text-green-500 transition-colors" />
           <p>{user.given_name}</p>
           <LogoutLink className={buttonVariants({ variant: "secondary" })}>
             Logout
