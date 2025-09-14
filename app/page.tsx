@@ -32,10 +32,10 @@ export default function Home() {
   return (
     <>
       <section className="text-center mb-16">
-        <h1 className="text-5xl md:text-6xl font-bold text-gray-800 leading-tight">
+        <h1 className="text-5xl md:text-6xl font-bold text-foreground leading-tight">
           Share Your Stories with the World
         </h1>
-        <p className="mt-6 text-lg text-gray-600 max-w-2xl mx-auto">
+        <p className="mt-6 text-lg text-muted-foreground max-w-2xl mx-auto">
           Create beautiful blog posts with ease. BlogPost provides a simple and intuitive platform to bring your ideas to life with a title, an image, and a description.
         </p>
         <div className="mt-10">
@@ -47,7 +47,7 @@ export default function Home() {
       </section>
       
       <div className="py-6">
-        <h1 className="text-3xl font-bold tracking-tight mb-8">Latest posts</h1>
+        <h1 className="text-3xl font-bold tracking-tight mb-8 text-foreground">Latest posts</h1>
 
         <Suspense fallback={<BlogPostsGrid />}>
           <BlogPosts />

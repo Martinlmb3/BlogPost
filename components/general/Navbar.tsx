@@ -9,6 +9,7 @@ import {
 } from "@kinde-oss/kinde-auth-nextjs/components";
 import { Bell,User } from "lucide-react";
 import { useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs";
+import { ThemeToggle } from "./ThemeToggle";
 
 export function Navbar() {
   const { getUser } = useKindeBrowserClient();
@@ -57,16 +58,18 @@ export function Navbar() {
 
       {user ? (
         <div className="flex items-center gap-4">
-          <Bell className="w-5 h-5 sm:w-6 sm:h-6 text-black cursor-pointer hover:text-green-500 transition-colors" />
-          <User className="w-5 h-5 sm:w-6 sm:h-6 text-black cursor-pointer hover:text-green-500 transition-colors" />
+          <ThemeToggle />
+          <Bell className="w-5 h-5 sm:w-6 sm:h-6 text-foreground cursor-pointer hover:text-green-500 transition-colors" />
+          <User className="w-5 h-5 sm:w-6 sm:h-6 text-foreground cursor-pointer hover:text-green-500 transition-colors" />
           <LogoutLink className={buttonVariants({ variant: "secondary" })}>
             Logout
           </LogoutLink>
         </div>
       ) : (
         <div className="flex items-center gap-4">
+          <ThemeToggle />
           <LoginLink className={buttonVariants()}>Login</LoginLink>
-            <RegisterLink className={`${buttonVariants({ variant: "outline" })} border-2 border-black-100`}>
+            <RegisterLink className={buttonVariants({ variant: "outline" })}>
             Sign up
             </RegisterLink>
         </div>

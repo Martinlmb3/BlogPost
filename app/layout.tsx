@@ -4,6 +4,7 @@ import "./globals.css";
 import { Navbar } from "@/components/general/Navbar";
 import { AuthProvider } from "@/components/general/AuthProvider";
 import { Footer } from "@/components/general/Footer";
+import { ThemeProvider } from "@/lib/theme-context";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -37,15 +38,17 @@ export default function RootLayout({
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
         </head>
         <body
-          className={`${geistSans.variable} ${geistMono.variable} antialiased w-full bg-gray-100`}
+          className={`${geistSans.variable} ${geistMono.variable} antialiased w-full bg-background text-foreground`}
         >
-          <div className="px-4 sm:px-6 lg:px-8">
-            <Navbar />
-            <main className="container mx-auto px-4 py-16">
-            {children}
-            </main>
-          </div>
-          <Footer />
+          <ThemeProvider>
+            <div className="px-4 sm:px-6 lg:px-8">
+              <Navbar />
+              <main className="container mx-auto px-4 py-16">
+              {children}
+              </main>
+            </div>
+            <Footer />
+          </ThemeProvider>
         </body>
       </html>
     </AuthProvider>
