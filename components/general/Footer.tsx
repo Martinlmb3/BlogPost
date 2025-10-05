@@ -3,13 +3,13 @@
 import Link from "next/link";
 
 export function Footer(){
-    return (    
+    return (
         <footer className="bg-muted text-foreground mt-16 w-full">
             <div className="container mx-auto px-4 py-12">
                 <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
                     {/* Brand Section */}
                     <div className="md:col-span-2">
-                        <h3 className="text-2xl font-bold mb-4">BlogPost</h3>
+                        <h3 className="text-2xl font-bold mb-4">Blog<span className="text-green-500">Post</span></h3>
                         <p className="text-muted-foreground mb-6 max-w-md">
                             Share your stories with the world. Create beautiful blog posts with ease and connect with readers who share your passions.
                         </p>
@@ -25,7 +25,7 @@ export function Footer(){
                             </a>
                         </div>
                     </div>
-                    
+
                     {/* Quick Links */}
                     <div>
                         <h4 className="text-lg font-semibold mb-4">Quick Links</h4>
@@ -35,7 +35,7 @@ export function Footer(){
                             <li><Link href="/create" className="text-muted-foreground hover:text-foreground transition-colors">Create Post</Link></li>
                         </ul>
                     </div>
-                    
+
                     {/* Support */}
                     <div>
                         <h4 className="text-lg font-semibold mb-4">Support</h4>
@@ -47,7 +47,7 @@ export function Footer(){
                         </ul>
                     </div>
                 </div>
-                
+
                 {/* Bottom Section */}
                 <div className="border-t border-border mt-8 pt-8 text-center">
                     <p className="text-muted-foreground">

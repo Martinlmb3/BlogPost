@@ -16,7 +16,7 @@ export function Navbar() {
   const user = getUser();
 
   return (
-    <nav className="py-5 flex items-center justify-between">
+    <nav className="py-5 flex items-center justify-between bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-800 px-6 w-full shadow-sm">
       <div className="flex items-center gap-6">
         <Link href="/">
           <h1 className="text-3xl font-semibold">
@@ -68,8 +68,8 @@ export function Navbar() {
       ) : (
         <div className="flex items-center gap-4">
           <ThemeToggle />
-          <LoginLink className={buttonVariants()}>Login</LoginLink>
-            <RegisterLink className={buttonVariants({ variant: "outline" })}>
+          <LoginLink className="bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-600 transition-colors">Login</LoginLink>
+            <RegisterLink className="bg-white dark:bg-gray-800 text-green-500 border-2 border-green-500 px-4 py-2 rounded-md hover:bg-green-50 dark:hover:bg-gray-700 transition-colors">
             Sign up
             </RegisterLink>
         </div>

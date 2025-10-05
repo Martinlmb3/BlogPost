@@ -38,11 +38,11 @@ export default function RootLayout({
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
         </head>
         <body
-          className={`${geistSans.variable} ${geistMono.variable} antialiased w-full bg-background text-foreground`}
+          className={`${geistSans.variable} ${geistMono.variable} antialiased w-full bg-gray-50 dark:bg-gray-950 text-foreground`}
         >
           <ThemeProvider>
+            <Navbar />
             <div className="px-4 sm:px-6 lg:px-8">
-              <Navbar />
               <main className="container mx-auto px-4 py-16">
               {children}
               </main>
